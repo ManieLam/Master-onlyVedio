@@ -75,7 +75,6 @@ Auth.login = function login() {
                             url: API_HOST + 'api2/auth.signon.json',
                             method: 'POST',
                             data: {
-                                // appid: APP_ID,
                                 code: code,
                                 iv: iv,
                                 encrypted_data: encryptedData

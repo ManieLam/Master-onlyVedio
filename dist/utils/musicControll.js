@@ -59,11 +59,12 @@ const musicPlayer = {
         let index = this.index = options.index;
         // console.log("playMusic", lists, index);
         wx.playBackgroundAudio({
-            dataUrl: lists.audio[index].URL,
-            title: lists.audio[index].name,
+            //lists.song非固定参数，需要根据接口改变
+            dataUrl: lists.song[index].URL,
+            title: lists.song[index].name,
             // coverImgUrl: lists.thumbnail,
         })
-        this.setOption({ current: lists.audio[index], lists: lists, state: true, index: index })
+        this.setOption({ current: lists.song[index], lists: lists, state: true, index: index })
 
     },
 
@@ -73,12 +74,10 @@ const musicPlayer = {
             success(res) {
                 let status = res.status;
                 if (status === 1) { // 正在播放中
-                    // console.info("stopMusic1")
                     wx.pauseBackgroundAudio(); //暂停播放
                     App.globalData.playing = false;
 
                 } else if (status === 0) { // 正在暂停中
-                    // console.info("stopMusic2")
                     App.globalData.playing = true;
                 }
 
@@ -90,7 +89,7 @@ const musicPlayer = {
     playNext() {
         let index = this.index;
         index++;
-        if (index == this.lists.audio.length) {
+        if (index == this.lists.song.length) {
             index = this.index = 0;
         }
         this.playMusic({ lists: this.lists, index: index });
@@ -103,43 +102,13 @@ const musicPlayer = {
         let index = this.index;
         index--;
         if (index < 0) {
-            index = this.index = this.lists.audio.length - 1;
+            index = this.index = this.lists.song.length - 1;
         }
         this.playMusic({ lists: this.lists, index: index });
         App.globalData.playIndex = index;
 
     },
-    /* 播放进度状态控制 */
-    // songPlay() {
-    //     clearInterval(timer);
-    //     let timer = setInterval(function() {
-    //         wx.getBackgroundAudioPlayerState({ // 调用小程序播放控制api
-    //             success(res) {
-    //                 let status = res.status;
-    //                 if (status === 0) { clearInterval(timer); }
-    //                 // that.setData({
-    //                 //     "musicData.songState": {
-    //                 //         progress: res.currentPosition / res.duration * 100,
-    //                 //         currentPosition: Util.timeToString(res.currentPosition), // 调用转换时间格式
-    //                 //         duration: Util.timeToString(res.duration) // 调用转换时间格式 
-    //                 //     }
-    //                 // });
-    //                 App.globalData.songState = {
-    //                     progress: res.currentPosition / res.duration * 100,
-    //                     currentPosition: Util.timeToString(res.currentPosition), // 调用转换时间格式
-    //                     duration: Util.timeToString(res.duration) // 调用转换时间格式 
-    //                 }
-    //                 wx.setStorageSync("songState", App.globalData.songState)
-    //             }
-    //         })
-    //     }, 1000);
-    //     //监听音乐停止,自动下一曲
-    //     wx.onBackgroundAudioStop(() => {
-    //         console.info("停止")
-    //         this.playNext();
-    //     })
 
-    // },
 
 };
 

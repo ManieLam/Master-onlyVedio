@@ -14,9 +14,12 @@
 
 .btn_min {
     color: $col_act;
-    border: 1rpx solid $col_act;
     background: #fff;
     margin: 10px 0;
+}
+
+.btn_min::after {
+    border: 1rpx solid $col_act;
 }
 
 .btn_min_hover,

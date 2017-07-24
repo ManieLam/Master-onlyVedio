@@ -64,67 +64,6 @@ const guard = function(fn) {
     }
 }
 
-/**
- * 点赞话题
- * @param  {int} id 话题id
- * @return {promise}
- */
-// const likeTopic = function likeTopic(id) {
-//     return new Promise(function(resolve, reject) {
-//         wx.request({
-//             url: API_HOST + 'api/mag.article.like.json?access_token=' + Auth.token(),
-//             method: 'POST',
-//             data: {
-//                 post_id: id
-//             },
-//             success: function(res) {
-//                 if (res.data.errcode === 0) {
-//                     wx.showToast({ title: res.data.errmsg || '万分感谢点赞！', })
-//                     resolve(res.data)
-//                 } else {
-//                     wx.showToast({ title: res.data.errmsg || '失败T^T', })
-//                     reject(res)
-//                 }
-//             },
-//             fail: function(res) {
-//                 reject(res)
-//             }
-//         })
-//     })
-// }
-
-/**
- * 取消点赞话题
- * @param  {int} id 话题id
- * @return {Promise}
- */
-// const unlikeTopic = function unlikeTopic(id) {
-//     return new Promise(function(resolve, reject) {
-//         wx.request({
-//             url: API_HOST + 'api/mag.article.unlike.json?access_token=' + Auth.token(),
-//             method: 'POST',
-//             data: {
-//                 post_id: id
-//             },
-//             success: function(res) {
-//                 if (res.data.errcode === 0) {
-//                     wx.showToast({
-//                         title: res.data.errmsg || '取消点赞了T^T',
-//                     })
-//                     resolve(res.data)
-//                 } else {
-//                     wx.showToast({
-//                         title: res.data.errmsg || '失败T^T',
-//                     })
-//                     reject(res)
-//                 }
-//             },
-//             fail: function(res) {
-//                 reject(res)
-//             }
-//         })
-//     })
-// }
 
 /**
  * 收藏话题
@@ -134,7 +73,7 @@ const guard = function(fn) {
 const favTopic = function favTopic(id) {
     return new Promise(function(resolve, reject) {
         wx.request({
-            url: API_HOST + 'api/mag.album.fav.json?access_token=' + Auth.token(),
+            url: API_HOST + requirePath.fav + '?access_token=' + Auth.token(),
             method: 'POST',
             data: {
                 post_id: id
@@ -167,7 +106,7 @@ const favTopic = function favTopic(id) {
 const unfavTopic = function unfavTopic(id) {
     return new Promise(function(resolve, reject) {
         wx.request({
-            url: API_HOST + 'api/mag.album.unfav.json?access_token=' + Auth.token(),
+            url: API_HOST + requirePath.unfav + '?access_token=' + Auth.token(),
             method: 'POST',
             data: {
                 post_id: id
@@ -192,69 +131,7 @@ const unfavTopic = function unfavTopic(id) {
     })
 }
 
-/**
- * 创建评论
- * @param  {object} args 参数
- * @return {promise}
- */
-// const createReply = function createReply(args) {
-//     return new Promise(function(resolve, reject) {
-//         wx.request({
-//             url: API_HOST + 'api/mag.article.reply.json?access_token=' + Auth.token(),
-//             method: 'POST',
-//             data: args,
-//             success: function(res) {
-//                 if (res.data.errcode === 0) {
-//                     wx.showToast({
-//                         title: res.data.errmsg || '感谢您的评论',
-//                     })
-//                     resolve(res.data)
-//                 } else {
-//                     wx.showToast({
-//                         title: res.data.errmsg || '失败了T^T',
-//                     })
-//                     reject(res)
-//                 }
-//             },
-//             fail: function(res) {
-//                 reject(res)
-//             }
-//         })
-//     })
-// }
 
-/**
- * 删除评论
- * @param  {int} id 评论id
- * @return {promise}
- */
-// const deleteReply = function deleteReply(id) {
-//     return new Promise(function(resolve, reject) {
-//         wx.request({
-//             url: API_HOST + 'api/mag.article.unreply.json?access_token=' + Auth.token(),
-//             method: 'POST',
-//             data: {
-//                 id: id
-//             },
-//             success: function(res) {
-//                 if (res.data.errcode === 0) {
-//                     wx.showToast({
-//                         title: res.data.errmsg || '删除成功'
-//                     })
-//                     resolve(res.data)
-//                 } else {
-//                     wx.showToast({
-//                         title: res.data.errmsg || '失败了T^T'
-//                     })
-//                     reject(res)
-//                 }
-//             },
-//             fail: function(res) {
-//                 reject(res)
-//             }
-//         })
-//     })
-// }
 
 /**
  * 获取收藏列表
@@ -264,7 +141,7 @@ const unfavTopic = function unfavTopic(id) {
 const queryFavList = function queryFavList(args) {
     return new Promise(function(resolve, reject) {
         wx.request({
-            url: API_HOST + 'api/mag.fav.list.json?access_token=' + Auth.token(),
+            url: API_HOST + requirePath.favList + '?access_token=' + Auth.token(),
             method: 'GET',
             data: args,
             success: function(res) {
@@ -284,46 +161,22 @@ const queryFavList = function queryFavList(args) {
     })
 }
 
-/**
- * 我的消息列表
- * @param  {object} args<{cursor}>
- * @return {promise}
- */
-// const queryNotificationList = function queryNotificationList(args) {
-//     return new Promise(function(resolve, reject) {
-//         wx.request({
-//             url: API_HOST + 'api2/notification.list.json?access_token=' + Auth.token(),
-//             method: 'GET',
-//             data: args,
-//             success: function(res) {
-//                 if (res.data.errcode === 0) {
-//                     resolve(res.data)
-//                 } else {
-//                     wx.showToast({
-//                         title: res.data.errmsg
-//                     })
-//                     reject(res)
-//                 }
-//             },
-//             fail: function(res) {
-//                 reject(res)
-//             }
-//         })
-//     })
-// }
 
+/*接口名称*/
+const requirePath = {
+    index: 'api/mag.album.home.json', //首页列表
+    lists: 'api/mag.album.list.json', //列表
+    detail: 'api/mag.album.get.json', //详情
+    favList: 'api/mag.fav.list.json', //收藏列表
+    unfav: 'api/mag.album.unfav.json', //取消收藏
+    fav: 'api/mag.album.fav.json', //收藏
+}
 
 
 module.exports = {
     call: call,
-    // postCollect: guard(postCollect),
-    // getCollect: guard(getCollect),
-    // likeTopic: guard(likeTopic),
-    // unlikeTopic: guard(unlikeTopic),
     favTopic: guard(favTopic),
     unfavTopic: guard(unfavTopic),
-    // createReply: guard(createReply),
-    // deleteReply: guard(deleteReply),
     queryFavList: guard(queryFavList),
-    // queryNotificationList: guard(queryNotificationList)
+    requirePath: requirePath,
 }

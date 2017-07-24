@@ -1,6 +1,6 @@
 <!-- pages/home/articalList.wxml -->
+<import  src="../template/hint.wxml" />
 <view class="m-lists_bar">
-    <!--  <view class="lists-body">-->
         <!-- 推荐专辑 -->
         <view class="lists-block">
             <view class="lists-block__header flex flex-between flex-center">
@@ -8,10 +8,11 @@
             </view>
             <view class="lists-block__content">
                 <navigator class="lists-block__cell" wx:for="{{booksList}}" wx:for-item="book" wx:key="" url="detail?id={{book.id}}">
-                    <image class="cell_image" src="{{book.thumbnail}}?imageView2/1/w/220/h/220"></image>
+                    <image class="cell_image" src="{{book.thumbnail}}"></image>
                     <view class="lists-block__text">{{book.title}}</view>
                 </navigator>
             </view>
         </view>
-    <!--</view>-->
+        
 </view>
+<template is="hint" data="{{text:'没有更多'}}"></template>

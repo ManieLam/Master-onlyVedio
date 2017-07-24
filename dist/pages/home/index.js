@@ -41,36 +41,32 @@ Page({
     },
     getList() {
         Require.call({
-            api: 'api/mag.album.home.json',
+            api: Require.requirePath.index,
         }).then(res => {
-            let category = res.category.filter(item => {
-                item.album.length > 3 ? item.album.splice(0, 4) : null;
-                return item.id != 8
+            res.category.map(item => {
+                item.album = item.album.slice(0, 3);
             });
             res.mode = parseInt(res.mode);
             that.setData({
                 "initHeader.imgUrls": res.sliders,
-                homeList: category,
-                mode: res.mode,
+                homeList: res.category, //首页列表
+                mode: res.mode, //mode状态
             })
-            if (res.mode) {
-                console.log(1111);
-                that.loadTopics();
-            }
+            if (res.mode) { that.loadTopics(); }
         })
     },
     getCollectList(options = {}) {
         Require.queryFavList({
-            data: options
-        }).then(res => {
-            that.setData({
-                    colList: res.albums,
-                    isEmpty: res.albums.length == 0 ? true : false,
-                    next_cursor: res.next_cursor
-                })
-                // console.log("colList", that.data.colList);
-        })
-        console.log("isEmpty", that.data.isEmpty);
+                data: options
+            }).then(res => {
+                that.setData({
+                        colList: res.albums, //收藏列表
+                        isEmpty: res.albums.length == 0 ? true : false,
+                        next_cursor: res.next_cursor
+                    })
+                    // console.log("colList", that.data.colList);
+            })
+            // console.log("isEmpty", that.data.isEmpty);
     },
     loadTopics: function(args) {
         const self = this
@@ -103,12 +99,10 @@ Page({
         let musicData = MusicCtr.getMusicData();
         that.setData({
             musicData: musicData,
-            // "musicData.songState": wx.getStorageSync("songState"),
-            // playIndex: wx.getStorageSync("playIndex"),
-            // playing: wx.getStorageSync("playing"),
             playIndex: App.globalData.playIndex,
             playing: App.globalData.playing,
         })
+        that.songPlay();
     },
     //下一首
     playPre() {
@@ -124,18 +118,14 @@ Page({
     stopAudio() {
         MusicCtr.stopMusic();
         that.setData({ playing: false, "musicData.playing": false })
-            // wx.setStorageSync("playing", false)
         App.globalData.playing = false;
     },
     //播放
     playAudio(e) {
         let index = e.currentTarget.dataset.index;
-        // let lists = wx.getStorageSync("playList")
         let lists = App.globalData.playList
 
-
         MusicCtr.playMusic({ lists: lists, index: index })
-        that.songPlay();
         that.setMusicData();
     },
     /* 播放进度状态控制 */
@@ -181,7 +171,6 @@ Page({
         that = this;
         that.getList();
         that.setData({ playing: false, "musicData.playing": false })
-            // wx.setStorageSync("playing", false)
         App.globalData.playing = false;
 
     },

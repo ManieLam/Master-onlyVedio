@@ -3,7 +3,7 @@
 <view class="m-lists_bar">
     <!-- 头部 -->
     <view class="single-header lists-list__cell "  >
-        <image src="{{bookList.thumbnail}}?imageView2/1/w/220/h/250" class="cover_img cell_image"></image>
+        <image src="{{bookList.thumbnail}}" class="cover_img cell_image"></image>
         <view class="lists-header__desc">
             <view class="  title">{{bookList.title}}</view>
             <view class="font_min desc_info">分类：{{bookList.category[0].name}}</view>
@@ -19,13 +19,13 @@
     </view>
     <!-- 书籍列表 -->
     <view class="lists-block">
-        <view class="lists-list__cell single-lists_cell" wx:for="{{bookList.audio}}" wx:for-item="audio" wx:key="">
+        <view class="lists-list__cell single-lists_cell" wx:for="{{bookList.song}}" wx:for-item="song" wx:key="">
             <image class=" min_img" src="../../images/circle-stop_sm.png" wx:if="{{playing && playIndex == index && isCurPlay}}"  bindtap="stopAudio" ></image>
             <image class=" min_img" src="../../images/circle-start_sm.png" wx:if="{{!playing ||playIndex != index ||!isCurPlay}}" data-index="{{index}}" data-type="1" bindtap="playAudio"></image>
             
             <view class="lists-line__desc">
-                <text class="line_bd font_mid">{{audio.name}}</text>
-                <text class="line_ft font_min">主播：{{audio.writer||'佚名'}}</text>
+                <text class="line_bd font_mid">{{song.name}}</text>
+                <text class="line_ft font_min">主播：{{song.singer||'佚名'}}</text>
             </view>
         </view>
     </view>

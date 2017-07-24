@@ -33,6 +33,15 @@
     color: #fff;
 }
 
+//渐变色
+@mixin gradient($from, $to) {
+    background: gradient(linear, 0 0, 0 bottom, from($from), to($to));
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0 0, 0 bottom, from($from), to($to));
+    /* Safari 5.1+, Chrome 10+ */
+    background: -webkit-linear-gradient(linear, 0 0, 0 bottom, from($from), to($to))
+}
+
 // 字体 变量
 $font_min: 10pt;
 $font_mid:14px;

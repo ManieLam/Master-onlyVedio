@@ -25,7 +25,7 @@ Page({
         })
         let accessToken = Auth.token() ? "?access_token=" + Auth.token() : "";
         Require.call({
-            api: 'api/mag.album.get.json' + accessToken,
+            api: Require.requirePath.detail + accessToken,
             data: params
         }).then(res => {
             wx.setNavigationBarTitle({ title: res.page_title })
@@ -33,7 +33,7 @@ Page({
             that.setData({
                 resultData: res,
                 bookList: result,
-                playAblumn: result.audio,
+                playAblumn: result.song,
                 is_faved: result.is_faved,
                 share_title: res.share_title
             })
@@ -92,7 +92,7 @@ Page({
             isCurPlay: isCurPlay,
         })
 
-        console.log("musicData::", that.data.musicData);
+        // console.log("musicData::", that.data.musicData);
     },
     /* 播放进度状态控制 */
     songPlay() {
@@ -134,7 +134,7 @@ Page({
     },
 
     onShow: function() {
-        console.log("global in detail::::", App.globalData);
+        // console.log("global in detail::::", App.globalData);
         that.setMusicData();
     },
 

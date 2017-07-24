@@ -14,7 +14,7 @@
                 <block wx:for="{{initHeader.imgUrls}}" wx:key="item">
                     <swiper-item>
                         <navigator url="{{item.path}}" open-type="reLaunch"
-                                   style="background:url('{{item.image}}?imageView2/1/w/750/h/300')no-repeat;background-size:cover;background-position:center;height:100%">
+                                   style="background:url('{{item.image}}')no-repeat;background-size:cover;background-position:center;height:100%">
                         
                         </navigator>
                     </swiper-item>
@@ -31,7 +31,7 @@
                 </navigator>
                 <view class="lists-block__content flex {{item.album.length>2?'flex-around':''}}">
                     <navigator class="lists-block__cell" wx:for="{{item.album}}" wx:for-item="album" wx:key="" url="detail?id={{album.id}}">
-                        <image class="cell_image" src="{{album.thumbnail}}?imageView2/1/w/150/h/250"></image>
+                        <image class="cell_image" src="{{album.thumbnail}}"></image>
                         <view class="lists-block__text">{{album.title}}</view>
                     </navigator>
                 </view>
@@ -63,7 +63,7 @@
        <view class="lists-block"  > 
             <view class="lists-block__content">
                 <navigator class="lists-block__cell"  wx:for="{{colList}}" wx:for-item="book" wx:key="" url="detail?id={{book.id}}">
-                    <image class="cell_image" src="{{book.thumbnail}}?imageView2/1/w/150/h/250"></image>
+                    <image class="cell_image" src="{{book.thumbnail}}"></image>
                     <view class="lists-block__text">{{book.title}}</view>
                 </navigator>
             </view>

@@ -331,6 +331,7 @@ const guard = function(fn) {
     }
 }
 
+
 module.exports = {
     queryTopics: queryTopics,
     getTopic: getTopic,
