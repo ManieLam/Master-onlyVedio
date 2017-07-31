@@ -1,24 +1,23 @@
-import { APP_ID, API_HOST, INVALID_TOKEN } from "config.js"
+// import { APP_ID, API_HOST, INVALID_TOKEN } from "config.js"
+import API from "api.js";
 
-const Auth = require('./Auth')
-    /**
-     * 获取话题列表
-     * @param  {object} args 参数
-     * @return {promise}
-     */
+// const Auth = require('./Auth')
+/**
+ * 获取话题列表
+ * @param  {object} args 参数
+ * @return {promise}
+ */
 const queryTopics = function queryTopics(args) {
     return new Promise(function(resolve, reject) {
         wx.request({
-            url: API_HOST + 'api2/topic.list.json',
+            url: API_HOST + 'api2/topic.list.json?access_token=' + Auth.token(),
             method: 'GET',
             data: args,
             success: function(res) {
                 if (res.data.errcode === 0) {
                     resolve(res.data)
                 } else {
-                    wx.showToast({
-                        title: res.data.errmsg
-                    })
+                    wx.showToast({ title: res.data.errmsg })
                     reject(res)
                 }
             },
